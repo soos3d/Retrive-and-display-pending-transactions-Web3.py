@@ -5,7 +5,7 @@ This script allows a user to input an HTTPS endpoint for a network based on the 
 
 This program has been designed using the Web3.py library and the instructions to install the and use the library can be found at https://web3py.readthedocs.io/en/stable/quickstart.html#installation
 
-What is Web3.py?
+<b>What is Web3.py?</b>
 
 Web3.py is a Python library for interacting with the Ethereum network (Or other networks based on the EVM).
 
@@ -14,12 +14,11 @@ It’s commonly found in decentralized apps (dapps) to help with sending transac
 The original API was derived from the Web3.js Javascript API but has since evolved toward the needs and creature comforts of Python developers.
 (source: Web3.py docs)
 
-How do I use this program to retrieve pending transactions?
+<b>How do I use this program to retrieve pending transactions?</b>
 
 1 - The Web3.py library must be installed in your environment. 
 2 - Have access to an HTTPS endpoint that allows creating the connection to the EVM.
     For the connection, it is recommended to use the service provided by chainstack.com, where you can create your personal node on the cloud. You can register and         create one node for free. This is the recommended option as not all the HTTPS endpoints that can be found online support the methods that can be used through           Web.py.
-    ![chainstack](https://user-images.githubusercontent.com/99700157/162471441-485249dc-0d21-4c1d-9092-c3de6f6fab85.png)
 
     Create a free account here: https://console.chainstack.com/user/account/create
     
