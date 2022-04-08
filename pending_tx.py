@@ -1,6 +1,6 @@
 from web3 import Web3
 
-node_url = input('Insert your BSC Node URL: ')   # accepts the user node URL
+node_url = input('Insert your Node URL: ')       # accepts the user node URL
 web3 = Web3(Web3.HTTPProvider(node_url))         # establish connection to the node
 
 # verify if the connection is successful 
