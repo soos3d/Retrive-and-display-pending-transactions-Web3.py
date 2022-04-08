@@ -26,7 +26,7 @@ The original API was derived from the Web3.js Javascript API but has since evolv
     ![b62be480-45d2-11ea-9989-803db0f9c44d](https://user-images.githubusercontent.com/99700157/162473751-ed2eb8b5-2218-487c-8f78-d7b3092539ff.png)
     
 <b>4</b> - The program will try to connect and give a message to the user specifying if the connection was successful or if the connection failed.
-    ![Yellow Magenta Black White Neon Scifi YouTube Intro (2)](https://user-images.githubusercontent.com/99700157/162474308-e83ae968-4752-492a-8573-4259ee341236.png)
+![Yellow Magenta Black White Neon Scifi YouTube Intro (2)](https://user-images.githubusercontent.com/99700157/162474308-e83ae968-4752-492a-8573-4259ee341236.png)
     
 <b>5</b> - If the connection was successful, it will display the latest block number and a list of pending transactions.
     ![Yellow Magenta Black White Neon Scifi YouTube Intro (2)](https://user-images.githubusercontent.com/99700157/162474607-04d754ba-a882-48d3-8145-2f9be4eb6fe9.png)   
