@@ -1,7 +1,10 @@
 # Retrive-and-display-pending-transactions-Web3.py
 This script allows a user to input an HTTPS endpoint for a network based on the EVM, then displays:
 - Latest block number;
-- List of pending transaction hash.
+- List of pending transaction hash.<br>
+
+You can check my Skillshare class where I elaborate more on this! WEB3.py: Interact with the Blockchain<br>
+Get 30 days fro free using this link! https://skl.sh/3McEymV
 
 This program has been designed using the Web3.py library and the instructions to install the and use the library can be found at https://web3py.readthedocs.io/en/stable/quickstart.html#installation
 
