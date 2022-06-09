@@ -21,6 +21,14 @@ The original API was derived from the Web3.js Javascript API but has since evolv
 
 <b>1</b> - The Web3.py library must be installed in your environment. 
 
+Run this code to install it in your enviroment:
+
+``` sh
+pip install web3
+```
+
+> **Note** that on Windows, you will need to install the [Microsoft C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) to make it work.
+
 <b>2</b> - Have access to an HTTPS endpoint that allows creating the connection to the EVM.
     For the connection, it is recommended to use the service provided by chainstack.com, where you can create your personal node on the cloud. You can register and create one node for free. This is the recommended option as not all the HTTPS endpoints that can be found online support the methods that can be used through Web3.py.
     ![Yellow Magenta Black White Neon Scifi YouTube Intro (1)](https://user-images.githubusercontent.com/99700157/162478127-94cd2344-72f1-4136-a220-8b2c8e52d194.png)
