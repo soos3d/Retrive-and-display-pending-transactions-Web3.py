@@ -1,21 +1,21 @@
-from web3 import Web3
+from web3 import Web3                            # Import the web3 library at the top.
 
-node_url = input('Insert your Node URL: ')       # accepts the user node URL
-web3 = Web3(Web3.HTTPProvider(node_url))         # establish connection to the node
+node_url = input('Insert your Node URL: ')       # Accepts the user node URL.
+web3 = Web3(Web3.HTTPProvider(node_url))         # Establish connection to the node.
 
-# verify if the connection is successful 
+# Verify if the connection is successful. This is optional, but it's nice to notify the user.
 if web3.isConnected():                                                          
     print('Connection Succsessful')
 else:
     print('Connection Failed')
 
-# displays the latest block
+# Display the latest block. This is optional, but it's nice to add this info for the user.
 print('The latest block number is: ', str(web3.eth.blockNumber) + '\n') 
 
 # retrive pending transactions hash
 pending_tx_filter = web3.eth.filter('pending')
-pending_tx = pending_tx_filter.get_new_entries()     # this is a list object
+pending_tx = pending_tx_filter.get_new_entries()     # This is a list object.
 
-# loop through the list of transcations and displays the tx hash
+# Loop through the list of transactions and display the tx hash.
 for hash in pending_tx:
     print('Hash of a Pending Transaction:' , web3.toHex(hash))
