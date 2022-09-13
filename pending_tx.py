@@ -5,7 +5,7 @@ web3 = Web3(Web3.HTTPProvider(node_url))         # Establish connection to the n
 
 # Verify if the connection is successful. This is optional, but it's nice to notify the user.
 if web3.isConnected():                                                          
-    print('Connection Succsessful')
+    print('Connection Successful')
 else:
     print('Connection Failed')
 
