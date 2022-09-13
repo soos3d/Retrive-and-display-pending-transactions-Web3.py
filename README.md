@@ -1,45 +1,151 @@
-# Retrive-and-display-pending-transactions-Web3.py
-This script allows a user to input an HTTPS endpoint for a network based on the EVM, then displays:
+# Retrive and display pending transactions using Web3.py
+
+## Introduction
+
+Retrieving pending transactions is a helpful concept; let's see how to retrieve the pending transactions and display the transaction hash using web3.py!
+
+The script we'll create in this tutorial allows a user to input an HTTPS endpoint for an EVM-based network, then displays:
 - Latest block number;
-- List of pending transaction hash.<br>
+- List of pending transaction hash.
 
-You can check my Skillshare class where I elaborate more on this! WEB3.py: Interact with the Blockchain<br>
-Get 30 days for free using this link! https://skl.sh/3McEymV
+After that, you can take the hashes and analyze them or do what you wish with some Python logic.
 
-This program has been designed using the Web3.py library and the instructions to install the and use the library can be found at https://web3py.readthedocs.io/en/stable/quickstart.html#installation
+> The code is commented to that you can understand what we do and why!
 
-<b>What is Web3.py?</b>
+> You can also check my Skillshare class where I elaborate more on this! 
+
+### WEB3.py: Interact with the Blockchain
+
+[Get 30 days for free on Skillshare using this link!](https://skl.sh/3McEymV)
+
+## Table of contents
+
+
+  - [Introduction](#introduction)
+    - [WEB3.py: Interact with the Blockchain](#web3py-interact-with-the-blockchain)
+  - [Requirements](#requirements)
+  - [What is Web3.py?](#what-is-web3py)
+  - [Explore the code](#explore-the-code)
+    - [Connect to the node](#connect-to-the-node)
+    - [Use a filter to retrieve pending transactions](#use-a-filter-to-retrieve-pending-transactions)
+    - [Extract the transaction hashes](#extract-the-transaction-hashes)
+  - [Run the script](#run-the-script)
+  - [Conclusion](#conclusion)
+
+## Requirements 
+
+This program has been designed using the `Web3.py` library, you will need to install the following: 
+
+- [Python](https://www.python.org/downloads/).
+- [web3.py library](https://web3py.readthedocs.io/en/stable/quickstart.html)
+
+You can install `web3.py` after installing Python with:
+
+```sh
+pip install web3
+```
+
+> **Note** that on Windows, you will need to install the [Microsoft C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) to make it work.
+
+Then you need access to a node endpoint to connect to the blockchain from which you want to get pending transactions.
+
+To access a node endpoint, I recommend using [Chainstack](https://chainstack.com/):
+
+Follow these steps to sign up on Chainstack, deploy a node, and find your endpoint credentials:
+
+  1. [Sign up with Chainstack](https://console.chainstack.com/user/account/create).
+  1. [Deploy a node](https://docs.chainstack.com/platform/join-a-public-network).
+  1. [View node access and credentials](https://docs.chainstack.com/platform/view-node-access-and-credentials).
+
+
+## What is Web3.py?
 
 Web3.py is a Python library for interacting with the Ethereum network (Or other networks based on the EVM).
 
 It’s commonly found in decentralized apps (dapps) to help with sending transactions, interacting with smart contracts, reading block data, and a variety of other use cases.
 
 The original API was derived from the Web3.js Javascript API but has since evolved toward the needs and creature comforts of Python developers.
-(source: Web3.py docs)
 
-<b>How do I use this program to retrieve pending transactions?</b>
+* source: [Web3.py docs](https://web3py.readthedocs.io/en/stable/)
 
-<b>1</b> - The Web3.py library must be installed in your environment. 
+## Explore the code
 
-Run this code to install it in your enviroment:
+The code is very Python fashion and is absolutely straightforward. The script can be divided into three sections:
 
-``` sh
-pip install web3
+1. Establish a connection to the node by inserting the node URL.
+1. Use a filter to retrieve pending transactions.
+1. Loop through the list of pending transactions returned by the filter and display the hashed on the console.
+
+Let's start by creating a new Python file in your project's folder; I named it `pending_tx.py`.
+
+### Connect to the node
+
+The first part of the script is to establish a connection to the node; for this, we use the following code.
+
+> **Note:** In this case, we ask the user for an input, so you can use the URL you want at that moment since you can use this script with any EVM-compatible network, but you can also hardcode the URL.
+
+```py
+from web3 import Web3                            # Import the web3 library at the top.
+
+node_url = input('Insert your Node URL: ')       # Accepts the user node URL.
+web3 = Web3(Web3.HTTPProvider(node_url))         # Establish connection to the node.
+
+# Verify if the connection is successful. This is optional, but it's nice to notify the user.
+if web3.isConnected():                                                          
+    print('Connection Successful')
+else:
+    print('Connection Failed')
 ```
 
-> **Note** that on Windows, you will need to install the [Microsoft C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) to make it work.
+### Use a filter to retrieve pending transactions
 
-<b>2</b> - Have access to an HTTPS endpoint that allows creating the connection to the EVM.
-    For the connection, it is recommended to use the service provided by chainstack.com, where you can create your personal node on the cloud. You can register and create one node for free. This is the recommended option as not all the HTTPS endpoints that can be found online support the methods that can be used through Web3.py.
-    ![Yellow Magenta Black White Neon Scifi YouTube Intro (1)](https://user-images.githubusercontent.com/99700157/162478127-94cd2344-72f1-4136-a220-8b2c8e52d194.png)
+The next step is to use a filter to retrieve the pending transactions.
 
-<b>3</b> - Run the script and input your HTTPS endpoint URL where the program prompts it:
-    ![b62be480-45d2-11ea-9989-803db0f9c44d](https://user-images.githubusercontent.com/99700157/162473751-ed2eb8b5-2218-487c-8f78-d7b3092539ff.png)
+```py
+# Display the latest block. This is optional, but it's nice to add this info for the user.
+print('The latest block number is: ', str(web3.eth.blockNumber) + '\n') 
+
+# Retrive pending transactions hash using a filter.
+pending_tx_filter = web3.eth.filter('pending')
+pending_tx = pending_tx_filter.get_new_entries()     # This is a list object.
+```
+
+This is now returning a list of the pending transactions in the mempool. 
+
+### Extract the transaction hashes
+
+The last step is to take the hashes from our list. We simply loop through the list, take the hash, convert it into HEX, and display it on the console.
+
+```py
+# loop through the list of transactions and display the tx hash.
+for hash in pending_tx:
+    print('Hash of a Pending Transaction:' , web3.toHex(hash))
+```
+
+That's it! So simple; at this point, we just need to run it.
+
+## Run the script
+
+To run the program, open a console in the folder where you saved the Python file and run:
+
+```sh
+python pending_tx.py
+```
+
+Input your HTTPS endpoint URL where the program prompts it:
+
+![screely-1663077686544](https://user-images.githubusercontent.com/99700157/189921742-f1f28b19-81d0-4dd2-a16f-b14b32a8de82.png)
     
-<b>4</b> - The program will try to connect and give a message to the user specifying if the connection was successful or if the connection failed.
-![Yellow Magenta Black White Neon Scifi YouTube Intro (2)](https://user-images.githubusercontent.com/99700157/162474308-e83ae968-4752-492a-8573-4259ee341236.png)
-    
-<b>5</b> - If the connection was successful, it will display the latest block number and a list of pending transactions.
-    ![Yellow Magenta Black White Neon Scifi YouTube Intro (2)](https://user-images.githubusercontent.com/99700157/162474607-04d754ba-a882-48d3-8145-2f9be4eb6fe9.png)   
+The program will try to connect and give a message to the user specifying if the connection was successful or failed.
 
-<b>Now you can look up the transaction hash on the chain explorer!</b>
+![screely-1663077664372](https://user-images.githubusercontent.com/99700157/189921989-89035f93-b004-4fbb-b17f-c74bb38583a3.png)
+    
+The console will display the latest block number and a list of pending transactions if the connection is successful.
+
+![screely-1663077676514](https://user-images.githubusercontent.com/99700157/189922250-570eeccf-824b-4df5-8d6f-0e7dc4b51cf4.png)
+
+Now you can look up the transaction hash on the chain explorer or include some more Python logic to extracts the data that you need!
+
+## Conclusion
+
+This simple script can retrieve pending transaction hashes from the mempool, but most importantly, it's an excellent way to learn how to use web3.py to interact with a blockchain!
